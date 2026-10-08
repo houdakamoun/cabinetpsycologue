@@ -1,0 +1,97 @@
+<div class="page patient-list-page">
+  <div class="page-header">
+    <div>
+      <span class="page-eyebrow">Gestion</span>
+      <h1 class="page-title">Patients</h1>
+      <p class="page-subtitle">{{ patients().length }} dossier(s) patient</p>
+    </div>
+    <div class="page-actions">
+      <a routerLink="/admin/patients/nouveau" class="btn-primary btn-sm">Nouveau patient</a>
+    </div>
+  </div>
+
+  <div class="admin-toolbar">
+    <div class="admin-search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5c736d" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input
+        type="search"
+        placeholder="Rechercher par nom, téléphone..."
+        [(ngModel)]="search"
+      />
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-state">Chargement...</div>
+  } @else if (error()) {
+    <div class="error-banner card-elegant card-flat" role="alert">
+      {{ error() }}
+      <button type="button" class="btn-primary btn-sm" (click)="loadPatients()">Réessayer</button>
+    </div>
+  } @else if (filteredPatients.length === 0) {
+    <div class="empty-state card-elegant card-flat">
+      <p>Aucun patient trouvé.</p>
+      <a routerLink="/admin/patients/nouveau" class="btn-primary btn-sm">Ajouter un patient</a>
+    </div>
+  } @else {
+    <div class="admin-table-wrap">
+      <div class="admin-table-cap">
+        <h2>Liste des dossiers</h2>
+        <span class="admin-count">{{ filteredPatients.length }}</span>
+      </div>
+      <div class="admin-table-scroll">
+        <table class="admin-table admin-table-patients">
+          <colgroup>
+            <col class="col-patient" />
+            <col class="col-phone" />
+            <col class="col-email" />
+            <col class="col-address" />
+            <col class="col-actions" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Téléphone</th>
+              <th>Email</th>
+              <th>Adresse</th>
+              <th class="col-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (patient of filteredPatients; track patient.id) {
+              <tr>
+                <td>
+                  <div class="cell-user">
+                    @if (photoUrl(patient)) {
+                      <img [src]="photoUrl(patient)!" alt="" class="cell-avatar-img" />
+                    } @else {
+                      <span class="cell-avatar">{{ patient.firstName[0] }}{{ patient.lastName[0] }}</span>
+                    }
+                    <div>
+                      <span class="cell-name">{{ patient.firstName }} {{ patient.lastName }}</span>
+                      @if (patient.birthDate) {
+                        <span class="cell-sub">Né(e) le {{ patient.birthDate | date: 'dd/MM/yyyy' }}</span>
+                      }
+                    </div>
+                  </div>
+                </td>
+                <td class="td-phone" [title]="patient.phone">{{ patient.phone }}</td>
+                <td class="td-ellipsis td-muted" [title]="patient.email || ''">{{ patient.email || '—' }}</td>
+                <td class="td-wrap td-muted" [title]="patient.address || ''">{{ patient.address || '—' }}</td>
+                <td class="td-actions">
+                  <div class="cell-actions">
+                    <a [routerLink]="['/admin/patients', patient.id]" class="action-chip action-chip--view">Voir</a>
+                    <a [routerLink]="['/admin/patients', patient.id, 'modifier']" class="action-chip action-chip--edit">Modifier</a>
+                    <button type="button" class="action-chip action-chip--danger" (click)="deletePatient(patient.id!)">Supprimer</button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+</div>

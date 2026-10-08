@@ -1,0 +1,134 @@
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.photo,
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar {
+  background: var(--gradient-brand);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.4rem;
+  border: 3px solid var(--color-accent);
+  box-shadow: var(--shadow-soft);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.details-grid h2,
+.section h2 {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.65rem 1.25rem;
+  margin: 0;
+}
+
+dt {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+dd {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+.notes-block {
+  white-space: pre-wrap;
+  line-height: 1.65;
+  background: var(--color-cream);
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-soft);
+  font-size: 0.9375rem;
+}
+
+.section {
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+}
+
+.note-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.note-item {
+  padding: 1rem 1.15rem;
+  background: var(--color-cream);
+  border-radius: var(--radius-md);
+  margin-bottom: 0.65rem;
+  border: 1px solid var(--color-border-soft);
+  border-left: 3px solid var(--color-primary);
+}
+
+.note-date {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.note-item p {
+  margin: 0.5rem 0 0;
+  line-height: 1.6;
+  font-size: 0.9375rem;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--color-border-soft);
+  font-size: 0.9375rem;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.back:hover {
+  color: var(--color-primary-dark);
+}

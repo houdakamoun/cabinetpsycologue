@@ -1,0 +1,350 @@
+@import '../home/home.css';
+
+.signup-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-page .public-nav .header-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(9, 144, 120, 0.15);
+}
+
+/* ── Main layout ── */
+.signup-main {
+  flex: 1;
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 2rem 4rem;
+}
+
+.signup-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* ── Info panel ── */
+.info-panel {
+  padding-top: 0.5rem;
+}
+
+.panel-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background: var(--color-accent);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 1.25rem;
+}
+
+.info-panel h1 {
+  font-size: 2.1rem;
+  line-height: 1.25;
+  color: var(--color-text);
+  margin: 0 0 1rem;
+  font-weight: 700;
+}
+
+.panel-desc {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  font-size: 1rem;
+  margin: 0 0 2rem;
+}
+
+.trust-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.trust-list li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.trust-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  font-size: 1.1rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.trust-list strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  margin-bottom: 0.2rem;
+}
+
+.trust-list span {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* ── Form panel ── */
+.form-panel {
+  padding: 2rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 40px rgba(9, 144, 120, 0.1);
+}
+
+.form-panel:hover {
+  transform: none;
+}
+
+.form-panel-head {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+.form-panel-head h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.form-panel-head p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form-section {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.form-section legend {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.85rem;
+  padding: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+.field-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.input-elegant::placeholder {
+  color: #a0b5af;
+  font-size: 0.9rem;
+}
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-footer {
+  margin-top: 0.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.privacy-note {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin: 0 0 1.25rem;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 0.85rem;
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Success state ── */
+.success-panel {
+  max-width: 520px;
+  margin: 2rem auto;
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 12px 48px rgba(9, 144, 120, 0.12);
+}
+
+.success-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1.5rem;
+}
+
+.check-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.check-circle {
+  stroke: var(--color-primary);
+  stroke-width: 2;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: stroke-circle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.check-path {
+  stroke: var(--color-primary);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke-path 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+}
+
+@keyframes stroke-circle {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes stroke-path {
+  to { stroke-dashoffset: 0; }
+}
+
+.success-panel h1 {
+  font-size: 1.75rem;
+  color: var(--color-primary);
+  margin: 0 0 0.75rem;
+}
+
+.success-lead {
+  font-size: 1.05rem;
+  color: var(--color-text);
+  line-height: 1.6;
+  margin: 0 0 0.75rem;
+}
+
+.success-note {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  margin: 0 0 2rem;
+}
+
+.success-panel .btn-outline {
+  display: inline-flex;
+}
+
+/* ── Footer ── */
+.signup-page .public-footer {
+  margin-top: auto;
+}
+
+@media (max-width: 860px) {
+  .signup-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .info-panel h1 {
+    font-size: 1.75rem;
+  }
+
+  .trust-list {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .signup-page .public-nav .header-badge {
+    display: none;
+  }
+
+  .signup-main {
+    padding: 2rem 1.25rem 3rem;
+  }
+
+  .form-panel {
+    padding: 1.5rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .success-panel {
+    padding: 2.5rem 1.5rem;
+  }
+}

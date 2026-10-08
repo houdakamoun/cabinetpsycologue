@@ -1,0 +1,186 @@
+<div class="public-page signup-page">
+  <nav class="public-nav">
+    <a routerLink="/accueil" class="brand">
+      <span class="brand-icon">🌿</span>
+      <span class="brand-name">Cabinet Psy</span>
+    </a>
+    <div class="nav-links">
+      <a routerLink="/accueil" routerLinkActive="active">Accueil</a>
+      <a routerLink="/a-propos" routerLinkActive="active">À propos</a>
+    </div>
+  </nav>
+
+  <main class="signup-main">
+    @if (success()) {
+      <div class="success-panel">
+        <div class="success-icon" aria-hidden="true">
+          <svg viewBox="0 0 52 52" class="check-svg">
+            <circle cx="26" cy="26" r="25" fill="none" class="check-circle" />
+            <path fill="none" d="M14 27l8 8 16-16" class="check-path" />
+          </svg>
+        </div>
+        <h1>Inscription confirmée</h1>
+        <p class="success-lead">
+          Merci <strong>{{ form.firstName }} {{ form.lastName }}</strong
+          >, vos coordonnées ont bien été transmises.
+        </p>
+        <p class="success-note">
+          La psychologue vous contactera si nécessaire. Vos informations restent strictement
+          confidentielles.
+        </p>
+        <a routerLink="/accueil" class="btn-outline">Retour à l'accueil</a>
+      </div>
+    } @else {
+      <div class="signup-layout">
+        <aside class="info-panel">
+          <span class="panel-tag">Nouveau patient</span>
+          <h1>Bienvenue au cabinet</h1>
+          <p class="panel-desc">
+            Complétez ce formulaire pour vous enregistrer. Quelques minutes suffisent pour faciliter
+            votre prise en charge.
+          </p>
+
+          <ul class="trust-list">
+            <li>
+              <span class="trust-icon">🔒</span>
+              <div>
+                <strong>Confidentialité</strong>
+                <span
+                  >Vos données sont protégées et accessibles uniquement par votre psychologue.</span
+                >
+              </div>
+            </li>
+            <li>
+              <span class="trust-icon">📋</span>
+              <div>
+                <strong>Prise en charge simplifiée</strong>
+                <span>Votre dossier est créé automatiquement dans le cabinet.</span>
+              </div>
+            </li>
+            <li>
+              <span class="trust-icon">⏱️</span>
+              <div>
+                <strong>Rapide</strong>
+                <span>Seuls le prénom, le nom et le téléphone sont obligatoires.</span>
+              </div>
+            </li>
+          </ul>
+        </aside>
+
+        <section class="form-panel card-elegant">
+          <div class="form-panel-head">
+            <h2>Vos coordonnées</h2>
+            <p>Les champs marqués d'un astérisque (*) sont obligatoires.</p>
+          </div>
+
+          <form (ngSubmit)="submit()" class="signup-form">
+            <fieldset class="form-section">
+              <legend>Identité</legend>
+              <div class="form-grid">
+                <label class="field">
+                  <span class="field-label">Prénom *</span>
+                  <input
+                    class="input-elegant"
+                    [(ngModel)]="form.firstName"
+                    name="firstName"
+                    placeholder="Ex. Marie"
+                    autocomplete="given-name"
+                    required
+                  />
+                </label>
+                <label class="field">
+                  <span class="field-label">Nom *</span>
+                  <input
+                    class="input-elegant"
+                    [(ngModel)]="form.lastName"
+                    name="lastName"
+                    placeholder="Ex. Dupont"
+                    autocomplete="family-name"
+                    required
+                  />
+                </label>
+                <label class="field">
+                  <span class="field-label">Date de naissance</span>
+                  <input
+                    class="input-elegant"
+                    type="date"
+                    [(ngModel)]="form.birthDate"
+                    name="birthDate"
+                    autocomplete="bday"
+                  />
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="form-section">
+              <legend>Contact</legend>
+              <div class="form-grid">
+                <label class="field">
+                  <span class="field-label">Téléphone *</span>
+                  <input
+                    class="input-elegant"
+                    type="tel"
+                    [(ngModel)]="form.phone"
+                    name="phone"
+                    placeholder="Ex. "
+                    autocomplete="tel"
+                    required
+                  />
+                </label>
+                <label class="field">
+                  <span class="field-label">Email</span>
+                  <input
+                    class="input-elegant"
+                    type="email"
+                    [(ngModel)]="form.email"
+                    name="email"
+                    placeholder="Ex. marie.dupont@email.com"
+                    autocomplete="email"
+                  />
+                </label>
+                <label class="field full">
+                  <span class="field-label">Adresse</span>
+                  <input
+                    class="input-elegant"
+                    [(ngModel)]="form.address"
+                    name="address"
+                    placeholder="Rue, ville, code postal"
+                    autocomplete="street-address"
+                  />
+                </label>
+              </div>
+            </fieldset>
+
+            @if (error()) {
+              <div class="error-banner" role="alert">
+                <span>⚠</span>
+                {{ error() }}
+              </div>
+            }
+
+            <div class="form-footer">
+              <p class="privacy-note">
+                En soumettant ce formulaire, vous acceptez que vos informations soient utilisées
+                dans le cadre de votre suivi au cabinet.
+              </p>
+              <button type="submit" class="btn-primary submit-btn" [disabled]="loading()">
+                @if (loading()) {
+                  <span class="spinner" aria-hidden="true"></span>
+                  Envoi en cours...
+                } @else {
+                  Confirmer mon inscription
+                }
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+    }
+  </main>
+
+  <footer class="public-footer">
+    <p class="footer-copy">
+      © 2026 Cabinet de Psychologie — Données traitées de manière confidentielle
+    </p>
+  </footer>
+</div>

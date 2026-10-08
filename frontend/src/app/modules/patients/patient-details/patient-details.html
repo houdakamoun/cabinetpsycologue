@@ -1,0 +1,77 @@
+@if (patient) {
+  <div class="page">
+    <div class="page-header">
+      <div class="profile-header">
+        @if (patientPhotoUrl) {
+          <img [src]="patientPhotoUrl" alt="Photo patient" class="photo" />
+        } @else {
+          <div class="avatar">{{ patient.firstName[0] }}{{ patient.lastName[0] }}</div>
+        }
+        <div>
+          <h1 class="page-title">{{ patient.firstName }} {{ patient.lastName }}</h1>
+          <p class="page-subtitle">{{ patient.phone }} · {{ patient.email || 'Pas d\'email' }}</p>
+        </div>
+      </div>
+      <a [routerLink]="['/admin/patients', patient.id, 'modifier']" class="btn-primary">Modifier</a>
+    </div>
+
+    <div class="details-grid">
+      <div class="card-elegant">
+        <h2>Informations</h2>
+        <dl>
+          <dt>Date de naissance</dt>
+          <dd>{{ patient.birthDate ? (patient.birthDate | date: 'dd/MM/yyyy') : '—' }}</dd>
+          <dt>Âge</dt>
+          <dd>{{ patient.age || '—' }}</dd>
+          <dt>Adresse</dt>
+          <dd>{{ patient.address || '—' }}</dd>
+        </dl>
+      </div>
+
+      <div class="card-elegant">
+        <h2>Notes privées 🔒</h2>
+        @if (patient.notes) {
+          <p class="notes-block">{{ patient.notes }}</p>
+        } @else {
+          <p class="muted">Aucune note générale.</p>
+        }
+      </div>
+    </div>
+
+    <div class="card-elegant section">
+      <h2>Notes de séance</h2>
+      <div class="note-form">
+        <textarea class="input-elegant" rows="3" [(ngModel)]="newNote" placeholder="Nouvelle note confidentielle..."></textarea>
+        <button type="button" class="btn-primary" (click)="addNote()">Ajouter</button>
+      </div>
+      @for (note of notes; track note.id) {
+        <div class="note-item">
+          <span class="note-date">{{ note.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+          <p>{{ note.content }}</p>
+        </div>
+      }
+    </div>
+
+    <div class="card-elegant section">
+      <h2>Historique des séances</h2>
+      @if (!patient.appointments?.length) {
+        <p class="muted">Aucune séance enregistrée.</p>
+      } @else {
+        @for (appt of patient.appointments; track appt.id) {
+          <div class="history-item">
+            <span>{{ appt.startTime | date: 'dd/MM/yyyy HH:mm' }}</span>
+            <span
+              class="badge"
+              [style.background]="statusColors[appt.status] + '33'"
+              [style.color]="statusColors[appt.status]"
+            >
+              {{ statusLabels[appt.status] }}
+            </span>
+          </div>
+        }
+      }
+    </div>
+
+    <a routerLink="/admin/patients" class="back">← Retour à la liste</a>
+  </div>
+}

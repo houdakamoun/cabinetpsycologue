@@ -1,0 +1,25 @@
+.section-link {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #099078;
+}
+
+.section-link:hover {
+  text-decoration: underline;
+}
+
+.empty-inline {
+  padding: 2.5rem;
+  text-align: center;
+  color: #5c736d;
+}
+
+.empty-inline p {
+  margin: 0;
+}
+
+.time-cell {
+  font-weight: 600;
+  color: #099078;
+  font-variant-numeric: tabular-nums;
+}

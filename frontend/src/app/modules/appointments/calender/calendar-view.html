@@ -1,0 +1,51 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <span class="page-eyebrow">Planning</span>
+      <h1 class="page-title">Calendrier</h1>
+      <p class="page-subtitle">{{ currentDate | date: 'MMMM yyyy' : '' : 'fr' }}</p>
+    </div>
+    <a routerLink="/admin/rendez-vous/nouveau" class="btn-primary">+ RDV</a>
+  </div>
+
+  <div class="calendar-toolbar card-elegant card-flat">
+    <div class="nav-buttons">
+      <button type="button" class="btn-outline small" (click)="prev()">←</button>
+      <button type="button" class="btn-outline small" (click)="next()">→</button>
+    </div>
+    <div class="view-tabs">
+      <button type="button" [class.active]="view === 'day'" (click)="setView('day')">Jour</button>
+      <button type="button" [class.active]="view === 'week'" (click)="setView('week')">Semaine</button>
+      <button type="button" [class.active]="view === 'month'" (click)="setView('month')">Mois</button>
+    </div>
+  </div>
+
+  <div class="calendar-grid">
+    @if (filteredAppointments.length === 0) {
+      <div class="empty-state card-elegant card-flat">Aucun rendez-vous pour cette période.</div>
+    } @else {
+      @for (appt of filteredAppointments; track appt.id) {
+        <div
+          class="cal-event card-elegant card-flat"
+          [style.borderLeft]="'4px solid ' + (appt.color || statusColors[appt.status])"
+        >
+          <div class="event-time">
+            {{ appt.startTime | date: 'EEE d MMM' : '' : 'fr' }} ·
+            {{ appt.startTime | date: 'HH:mm' }} - {{ appt.endTime | date: 'HH:mm' }}
+          </div>
+          <div class="event-title">{{ appt.patient?.firstName }} {{ appt.patient?.lastName }}</div>
+          <span
+            class="badge"
+            [style.background]="statusColors[appt.status] + '33'"
+            [style.color]="statusColors[appt.status]"
+          >
+            {{ statusLabels[appt.status] }}
+          </span>
+          <a [routerLink]="['/admin/rendez-vous', appt.id, 'modifier']" class="edit-link">Modifier</a>
+        </div>
+      }
+    }
+  </div>
+
+  <p class="hint">Phase 3 : drag & drop avec FullCalendar</p>
+</div>

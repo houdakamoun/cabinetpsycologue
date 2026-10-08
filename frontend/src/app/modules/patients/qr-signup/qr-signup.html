@@ -1,0 +1,75 @@
+<div class="page qr-page">
+  <div class="page-header">
+    <div>
+      <span class="page-eyebrow">Patients</span>
+      <h1 class="page-title">QR Code d'inscription</h1>
+      <p class="page-subtitle">
+        Affichez ce QR code dans votre cabinet. Le patient scanne et remplit ses coordonnées en autonomie.
+      </p>
+    </div>
+    <a routerLink="/admin/patients" class="btn-outline">← Retour aux patients</a>
+  </div>
+
+  <div class="qr-layout">
+    <div class="qr-card card-elegant">
+      <div class="qr-card-top">
+        <span class="qr-badge">À afficher en salle d'attente</span>
+        <h2>Scanner pour s'inscrire</h2>
+        <p class="hint">Le patient est redirigé vers le formulaire d'inscription sécurisé.</p>
+      </div>
+
+      @if (qrDataUrl) {
+        <div class="qr-frame">
+          <img [src]="qrDataUrl" alt="QR code inscription patient" class="qr-image" />
+        </div>
+      } @else {
+        <div class="qr-loading">
+          <span class="spinner"></span>
+          <p>Génération du QR code...</p>
+        </div>
+      }
+
+      <button type="button" class="btn-primary qr-download" (click)="downloadQr()" [disabled]="!qrDataUrl">
+        Télécharger le QR code
+      </button>
+    </div>
+
+    <div class="link-card card-elegant">
+      <div class="link-card-top">
+        <h2>Lien direct</h2>
+        <p class="hint">Partagez ce lien par SMS, WhatsApp ou email.</p>
+      </div>
+
+      <div class="link-box">
+        <code>{{ signupUrl }}</code>
+        <button type="button" class="btn-secondary copy-btn" (click)="copyLink()">
+          {{ copied ? '✓ Copié' : 'Copier' }}
+        </button>
+      </div>
+
+      <div class="tips-grid">
+        <div class="tip-item">
+          <span class="tip-num">1</span>
+          <div>
+            <strong>Imprimez le QR</strong>
+            <p>Format A5 ou A4, visible dès l'entrée du cabinet.</p>
+          </div>
+        </div>
+        <div class="tip-item">
+          <span class="tip-num">2</span>
+          <div>
+            <strong>Le patient scanne</strong>
+            <p>Il remplit prénom, nom, téléphone et coordonnées.</p>
+          </div>
+        </div>
+        <div class="tip-item">
+          <span class="tip-num">3</span>
+          <div>
+            <strong>Dossier créé</strong>
+            <p>Le patient apparaît automatiquement dans votre liste.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

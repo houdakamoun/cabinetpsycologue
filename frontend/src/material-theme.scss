@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+
+html {
+  height: 100%;
+
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$green-palette,
+        tertiary: mat.$orange-palette,
+      ),
+      typography: (
+        plain-family: 'Segoe UI',
+        brand-family: 'Segoe UI',
+      ),
+      density: 0,
+    )
+  );
+
+  /* Alignement Material sur la palette cabinet */
+  --mat-sys-primary: #099078;
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-primary-container: #ffd6d1;
+  --mat-sys-on-primary-container: #2a3f3a;
+  --mat-sys-secondary: #ffd6d1;
+  --mat-sys-surface: #f9ece5;
+  --mat-sys-surface-container: #ffffff;
+  --mat-sys-surface-container-high: #f9ece5;
+  --mat-sys-outline: rgba(255, 214, 209, 0.85);
+  --mat-sys-outline-variant: rgba(249, 236, 229, 0.9);
+}
+
+body {
+  color-scheme: light;
+  background-color: #f9ece5;
+  color: #2a3f3a;
+  margin: 0;
+  height: 100%;
+}

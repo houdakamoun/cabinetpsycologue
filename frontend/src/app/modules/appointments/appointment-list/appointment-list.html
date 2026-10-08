@@ -1,0 +1,90 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <span class="page-eyebrow">Planning</span>
+      <h1 class="page-title">Rendez-vous</h1>
+      <p class="page-subtitle">Gérez vos consultations</p>
+    </div>
+    <div class="page-actions">
+      <a routerLink="/admin/calendrier" class="btn-outline btn-sm">Calendrier</a>
+      <a routerLink="/admin/rendez-vous/nouveau" class="btn-primary btn-sm">Nouveau rendez-vous</a>
+    </div>
+  </div>
+
+  @if (loading) {
+    <div class="loading-state">Chargement...</div>
+  } @else if (appointments.length === 0) {
+    <div class="empty-state card-elegant card-flat">
+      <p>Aucun rendez-vous planifié.</p>
+      <a routerLink="/admin/rendez-vous/nouveau" class="btn-primary btn-sm">Planifier un RDV</a>
+    </div>
+  } @else {
+    <div class="admin-table-wrap">
+      <div class="admin-table-cap">
+        <h2>Planning des consultations</h2>
+        <span class="admin-count">{{ appointments.length }}</span>
+      </div>
+      <div class="admin-table-scroll">
+        <table class="admin-table admin-table-appointments">
+          <colgroup>
+            <col class="col-patient" />
+            <col class="col-date" />
+            <col class="col-time" />
+            <col class="col-status" />
+            <col class="col-amount" />
+            <col class="col-actions" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Date</th>
+              <th>Horaire</th>
+              <th>Statut</th>
+              <th>Tarif</th>
+              <th class="col-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (appt of appointments; track appt.id) {
+              <tr>
+                <td
+                  class="td-accent td-ellipsis"
+                  [style.--row-accent]="appt.color || statusColors[appt.status]"
+                >
+                  <span class="cell-name">
+                    {{ appt.patient?.firstName }} {{ appt.patient?.lastName }}
+                  </span>
+                </td>
+                <td class="td-ellipsis">{{ appt.startTime | date: 'dd/MM/yyyy' }}</td>
+                <td class="td-time">
+                  {{ appt.startTime | date: 'HH:mm' }} – {{ appt.endTime | date: 'HH:mm' }}
+                </td>
+                <td>
+                  <span
+                    class="badge"
+                    [style.background]="statusColors[appt.status] + '22'"
+                    [style.color]="statusColors[appt.status]"
+                  >
+                    {{ statusLabels[appt.status] }}
+                  </span>
+                </td>
+                <td class="td-amount"><strong>{{ appt.price }} €</strong></td>
+                <td class="td-actions">
+                  <div class="cell-actions">
+                    <a [routerLink]="['/admin/rendez-vous', appt.id, 'modifier']" class="action-chip action-chip--edit">Modifier</a>
+                    @if (appt.status !== 'COMPLETED') {
+                      <button type="button" class="action-chip action-chip--success" (click)="updateStatus(appt.id!, 'COMPLETED')">Terminer</button>
+                    }
+                    @if (appt.status !== 'CANCELLED') {
+                      <button type="button" class="action-chip action-chip--danger" (click)="updateStatus(appt.id!, 'CANCELLED')">Annuler</button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+</div>

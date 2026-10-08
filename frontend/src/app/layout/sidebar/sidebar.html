@@ -1,0 +1,42 @@
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-logo" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+        <path d="M12 3c-4 6-8 9-8 13a8 8 0 1016 0c0-4-4-7-8-13z"/>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <span class="brand-name">Cabinet Psy</span>
+      <span class="brand-role">Espace professionnel</span>
+    </div>
+  </div>
+
+  <p class="nav-section">Menu principal</p>
+  <nav class="nav">
+    @for (item of navItems; track item.route) {
+      <a [routerLink]="item.route" routerLinkActive="active" class="nav-link">
+        <span class="nav-icon" [class]="'icon-' + item.icon"></span>
+        <span class="nav-label">{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+
+  <p class="nav-section">Outils</p>
+  <nav class="nav nav-tools">
+    <a routerLink="/admin/patients/qr-inscription" routerLinkActive="active" class="nav-link">
+      <span class="nav-icon icon-qr"></span>
+      <span class="nav-label">QR Inscription</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a routerLink="/accueil" class="footer-link">
+      <span class="nav-icon icon-external"></span>
+      Site public
+    </a>
+    <button type="button" class="logout-btn" (click)="logout()">
+      <span class="nav-icon icon-logout"></span>
+      Déconnexion
+    </button>
+  </div>
+</aside>

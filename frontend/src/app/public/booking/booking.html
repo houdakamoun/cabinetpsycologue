@@ -1,0 +1,106 @@
+<div class="public-page">
+  <nav class="public-nav">
+    <a routerLink="/accueil" class="brand">
+      <span class="brand-icon">🌿</span>
+      <span class="brand-name">Cabinet Psy</span>
+    </a>
+    <div class="nav-links">
+      <a routerLink="/accueil" routerLinkActive="active">Accueil</a>
+      <a routerLink="/a-propos" routerLinkActive="active">À propos</a>
+      <a routerLink="/contact" routerLinkActive="active">Contact</a>
+      <a routerLink="/login" class="btn-primary btn-sm">Espace pro</a>
+    </div>
+  </nav>
+
+  <section class="contact">
+    <div class="contact-head">
+      <span class="section-eyebrow">Contact</span>
+      <h1>Prendre rendez-vous</h1>
+      <p class="subtitle">Je vous réponds sous 24 à 48 heures ouvrées.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="info card-elegant card-flat">
+        <h2>Coordonnées</h2>
+
+        <div class="contact-items">
+          <div class="contact-item">
+            <span class="ci-icon">👩‍⚕️</span>
+            <div>
+              <strong>Psychologue Clinicienne</strong>
+              <span>Dr. Rihéme Lanani</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="ci-icon">📍</span>
+            <div>
+              <strong>Localisation</strong>
+              <span>Gouvernorat de Tunis, Tunisie</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="ci-icon">✉️</span>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:lananirihem94@gmail.com">lananirihem94@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="ci-icon">🔗</span>
+            <div>
+              <strong>LinkedIn</strong>
+              <a href="https://www.linkedin.com/in/rihème-lanani-80856212a" target="_blank" rel="noopener">
+                Voir le profil
+              </a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="ci-icon">💬</span>
+            <div>
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/216XXXXXXXX" target="_blank" rel="noopener">
+                Envoyer un message
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card card-elegant card-flat">
+        @if (sent) {
+          <div class="success-panel">
+            <div class="success-circle">✓</div>
+            <h2>Message envoyé</h2>
+            <p>Merci ! Votre message a bien été transmis. Je vous recontacterai rapidement.</p>
+          </div>
+        } @else {
+          <h2>Formulaire de contact</h2>
+          <p class="form-desc">Décrivez brièvement votre demande, je reviendrai vers vous.</p>
+          <form (ngSubmit)="submit()" class="contact-form">
+            <label class="field">
+              <span class="field-label">Nom complet *</span>
+              <input class="input-elegant" [(ngModel)]="form.name" name="name" placeholder="Votre nom" required />
+            </label>
+            <label class="field">
+              <span class="field-label">Email *</span>
+              <input class="input-elegant" type="email" [(ngModel)]="form.email" name="email" placeholder="votre@email.com" required />
+            </label>
+            <label class="field">
+              <span class="field-label">Téléphone</span>
+              <input class="input-elegant" [(ngModel)]="form.phone" name="phone" placeholder="06 XX XX XX XX" />
+            </label>
+            <label class="field">
+              <span class="field-label">Message</span>
+              <textarea class="input-elegant" rows="4" [(ngModel)]="form.message" name="message" placeholder="Comment puis-je vous aider ?"></textarea>
+            </label>
+            <button type="submit" class="btn-primary full">Envoyer le message</button>
+          </form>
+        }
+      </div>
+    </div>
+  </section>
+
+  <footer class="public-footer">
+    <p class="footer-copy">© 2026 Cabinet de Psychologie — Tous droits réservés</p>
+  </footer>
+</div>

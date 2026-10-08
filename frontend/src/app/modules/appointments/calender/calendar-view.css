@@ -1,0 +1,94 @@
+.calendar-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding: 0.85rem 1.25rem;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.view-tabs {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--color-cream);
+  padding: 0.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-soft);
+}
+
+.view-tabs button {
+  border: none;
+  background: transparent;
+  padding: 0.45rem 1rem;
+  border-radius: calc(var(--radius-md) - 2px);
+  cursor: pointer;
+  font-weight: 600;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  transition: all 0.2s;
+}
+
+.view-tabs button.active {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-xs);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.85rem;
+}
+
+.cal-event {
+  position: relative;
+  padding: 1.25rem;
+  transition: box-shadow 0.2s;
+}
+
+.cal-event:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.event-time {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.event-title {
+  font-weight: 700;
+  margin: 0.45rem 0;
+  font-size: 1rem;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.edit-link {
+  display: inline-block;
+  margin-top: 0.65rem;
+  color: var(--color-primary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.edit-link:hover {
+  text-decoration: underline;
+}
+
+.hint {
+  margin-top: 1.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.empty {
+  grid-column: 1 / -1;
+}

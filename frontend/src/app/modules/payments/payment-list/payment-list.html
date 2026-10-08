@@ -1,0 +1,123 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <span class="page-eyebrow">Finances</span>
+      <h1 class="page-title">Paiements</h1>
+      <p class="page-subtitle">Suivi des séances payées et impayées</p>
+    </div>
+    <button type="button" class="btn-primary btn-sm" (click)="showForm = !showForm">
+      {{ showForm ? 'Fermer' : 'Nouveau paiement' }}
+    </button>
+  </div>
+
+  <div class="admin-stats admin-stats-compact">
+    <div class="admin-stat" style="--stat-accent: #047857; --stat-bg: #ecfdf5">
+      <div class="admin-stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+          <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/>
+        </svg>
+      </div>
+      <div>
+        <p class="admin-stat-value">{{ totalPaid | currency: 'EUR' : 'symbol' : '1.0-0' : 'fr' }}</p>
+        <p class="admin-stat-label">Total encaissé</p>
+      </div>
+    </div>
+    <div class="admin-stat" style="--stat-accent: #b45309; --stat-bg: #fffbeb">
+      <div class="admin-stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+          <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+        </svg>
+      </div>
+      <div>
+        <p class="admin-stat-value">{{ totalUnpaid | currency: 'EUR' : 'symbol' : '1.0-0' : 'fr' }}</p>
+        <p class="admin-stat-label">En attente</p>
+      </div>
+    </div>
+  </div>
+
+  @if (showForm) {
+    <form (ngSubmit)="createPayment()" class="form-card card-elegant card-flat admin-form-inline">
+      <div class="form-grid">
+        <label>
+          Patient
+          <select class="input-elegant" [(ngModel)]="newPayment.patientId" name="patientId">
+            @for (p of patients; track p.id) {
+              <option [ngValue]="p.id">{{ p.firstName }} {{ p.lastName }}</option>
+            }
+          </select>
+        </label>
+        <label>
+          Montant (€)
+          <input class="input-elegant" type="number" [(ngModel)]="newPayment.amount" name="amount" />
+        </label>
+      </div>
+      <button type="submit" class="btn-primary btn-sm">Enregistrer</button>
+    </form>
+  }
+
+  @if (loading) {
+    <div class="loading-state">Chargement…</div>
+  } @else if (payments.length === 0) {
+    <div class="empty-state card-elegant card-flat">
+      <p>Aucun paiement enregistré.</p>
+    </div>
+  } @else {
+    <div class="admin-table-wrap">
+      <div class="admin-table-cap">
+        <h2>Historique des paiements</h2>
+        <span class="admin-count">{{ payments.length }}</span>
+      </div>
+      <div class="admin-table-scroll">
+        <table class="admin-table admin-table-payments">
+          <colgroup>
+            <col class="col-patient" />
+            <col class="col-date" />
+            <col class="col-amount" />
+            <col class="col-status" />
+            <col class="col-actions" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Date</th>
+              <th>Montant</th>
+              <th>Statut</th>
+              <th class="col-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (payment of payments; track payment.id) {
+              <tr>
+                <td class="td-ellipsis">
+                  <span class="cell-name">
+                    {{ payment.patient?.firstName }} {{ payment.patient?.lastName }}
+                  </span>
+                </td>
+                <td class="td-ellipsis td-muted">{{ payment.createdAt | date: 'dd/MM/yyyy' }}</td>
+                <td class="td-amount">
+                  <strong>{{ payment.amount | currency: 'EUR' : 'symbol' : '1.0-0' : 'fr' }}</strong>
+                </td>
+                <td>
+                  <span class="badge" [class.paid]="payment.status === 'PAID'">
+                    {{ statusLabels[payment.status] }}
+                  </span>
+                </td>
+                <td class="td-actions">
+                  <button
+                    type="button"
+                    class="action-chip"
+                    [class.action-chip--success]="payment.status !== 'PAID'"
+                    [class.action-chip--edit]="payment.status === 'PAID'"
+                    (click)="togglePaid(payment)"
+                  >
+                    {{ payment.status === 'PAID' ? 'Marquer impayé' : 'Marquer payé' }}
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+</div>

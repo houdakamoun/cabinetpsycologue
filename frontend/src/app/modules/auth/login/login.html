@@ -1,0 +1,53 @@
+<div class="auth-page">
+  <div class="auth-panel auth-brand-panel">
+    <a routerLink="/accueil" class="auth-logo">
+      <span>🌿</span> Cabinet Psy
+    </a>
+    <h1>Espace professionnel</h1>
+    <p>Gérez vos patients, rendez-vous et notes de séance en toute confidentialité.</p>
+    <ul class="auth-features">
+      <li>Dossiers patients sécurisés</li>
+      <li>Calendrier & rendez-vous</li>
+      <li>Suivi des paiements</li>
+    </ul>
+  </div>
+
+  <div class="auth-panel auth-form-panel">
+    <div class="auth-card card-elegant card-flat">
+      <div class="auth-head">
+        <h2>Connexion</h2>
+        <p>Accédez à votre tableau de bord</p>
+      </div>
+
+      <form (ngSubmit)="submit()" class="auth-form">
+        <label class="field">
+          <span class="field-label">Email</span>
+          <input class="input-elegant" type="email" [(ngModel)]="email" name="email" placeholder="vous@email.com" required />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Mot de passe</span>
+          <input class="input-elegant" type="password" [(ngModel)]="password" name="password" placeholder="••••••••" required />
+        </label>
+
+        @if (error) {
+          <div class="error-banner" role="alert">{{ error }}</div>
+        }
+
+        <button type="submit" class="btn-primary full" [disabled]="loading">
+          @if (loading) {
+            <span class="spinner"></span> Connexion...
+          } @else {
+            Se connecter
+          }
+        </button>
+      </form>
+
+      <p class="auth-footer">
+        Pas encore de compte ?
+        <a routerLink="/register">Créer un compte</a>
+      </p>
+      <a routerLink="/accueil" class="back-link">← Retour au site public</a>
+    </div>
+  </div>
+</div>

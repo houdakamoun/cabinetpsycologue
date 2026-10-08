@@ -1,0 +1,60 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <span class="page-eyebrow">Planning</span>
+      <h1 class="page-title">{{ isEdit ? 'Modifier le rendez-vous' : 'Nouveau rendez-vous' }}</h1>
+    </div>
+  </div>
+
+  <form (ngSubmit)="submit()" class="form-card card-elegant card-flat">
+    <div class="form-grid">
+      <label>
+        Patient *
+        <select class="input-elegant" [(ngModel)]="appointment.patientId" name="patientId" required>
+          @for (p of patients; track p.id) {
+            <option [ngValue]="p.id">{{ p.firstName }} {{ p.lastName }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Statut
+        <select class="input-elegant" [(ngModel)]="appointment.status" name="status">
+          @for (s of statuses; track s) {
+            <option [ngValue]="s">{{ statusLabels[s] }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Début *
+        <input class="input-elegant" type="datetime-local" [(ngModel)]="appointment.startTime" name="startTime" required />
+      </label>
+
+      <label>
+        Fin *
+        <input class="input-elegant" type="datetime-local" [(ngModel)]="appointment.endTime" name="endTime" required />
+      </label>
+
+      <label>
+        Prix (€)
+        <input class="input-elegant" type="number" [(ngModel)]="appointment.price" name="price" />
+      </label>
+
+      <label>
+        Couleur
+        <input class="input-elegant" type="color" [(ngModel)]="appointment.color" name="color" />
+      </label>
+
+      <label class="full">
+        Notes
+        <textarea class="input-elegant" rows="3" [(ngModel)]="appointment.notes" name="notes"></textarea>
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <a routerLink="/admin/rendez-vous" class="btn-outline">Annuler</a>
+      <button type="submit" class="btn-primary" [disabled]="loading">Enregistrer</button>
+    </div>
+  </form>
+</div>

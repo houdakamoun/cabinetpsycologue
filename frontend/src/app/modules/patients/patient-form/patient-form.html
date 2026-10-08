@@ -1,0 +1,77 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <span class="page-eyebrow">Patients</span>
+      <h1 class="page-title">{{ isEdit ? 'Modifier le patient' : 'Nouveau patient' }}</h1>
+      <p class="page-subtitle">Informations confidentielles — visibles uniquement par vous</p>
+    </div>
+  </div>
+
+  <form (ngSubmit)="submit()" class="form-card card-elegant card-flat">
+    <div class="form-grid">
+      <label>
+        Prénom *
+        <input class="input-elegant" [(ngModel)]="patient.firstName" name="firstName" required />
+      </label>
+      <label>
+        Nom *
+        <input class="input-elegant" [(ngModel)]="patient.lastName" name="lastName" required />
+      </label>
+      <label>
+        Téléphone *
+        <input class="input-elegant" [(ngModel)]="patient.phone" name="phone" required />
+      </label>
+      <label>
+        Email
+        <input class="input-elegant" type="email" [(ngModel)]="patient.email" name="email" />
+      </label>
+      <label>
+        Date de naissance
+        <input class="input-elegant" type="date" [(ngModel)]="patient.birthDate" name="birthDate" />
+      </label>
+      <label class="full photo-field">
+        <span class="field-label">Photo du patient</span>
+        <div class="photo-upload">
+          @if (photoPreview) {
+            <div class="photo-preview-wrap">
+              <img [src]="photoPreview" alt="Aperçu photo patient" class="photo-preview" />
+              <button type="button" class="btn-remove-photo" (click)="removePhoto()">×</button>
+            </div>
+          }
+          <label class="photo-dropzone">
+            <input
+              type="file"
+              accept="image/png,image/jpeg,image/jpg"
+              (change)="onPhotoSelected($event)"
+              hidden
+            />
+            <span class="dropzone-icon">📷</span>
+            <span class="dropzone-text">
+              {{ photoPreview ? 'Changer la photo' : 'Choisir une image' }}
+            </span>
+            <span class="dropzone-hint">PNG, JPEG ou JPG — max. 5 Mo</span>
+          </label>
+        </div>
+      </label>
+      <label class="full">
+        Adresse
+        <input class="input-elegant" [(ngModel)]="patient.address" name="address" />
+      </label>
+      <label class="full">
+        Notes psychologiques privées
+        <textarea class="input-elegant" rows="5" [(ngModel)]="patient.notes" name="notes"></textarea>
+      </label>
+    </div>
+
+    @if (error) {
+      <div class="error-banner" role="alert">{{ error }}</div>
+    }
+
+    <div class="form-actions">
+      <a routerLink="/admin/patients" class="btn-outline">Annuler</a>
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        {{ loading ? 'Enregistrement...' : 'Enregistrer' }}
+      </button>
+    </div>
+  </form>
+</div>

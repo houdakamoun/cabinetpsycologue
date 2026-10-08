@@ -1,0 +1,115 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 2.25rem;
+  background: #ffffff;
+  border-bottom: 1px solid #d8e4e0;
+  box-shadow: 0 1px 0 rgba(10, 46, 40, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  min-height: 64px;
+}
+
+.greeting {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f2924;
+  letter-spacing: -0.02em;
+}
+
+.date {
+  margin: 0.15rem 0 0;
+  color: #5c736d;
+  text-transform: capitalize;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.confidential-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  background: #ecfdf5;
+  color: #059669;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: 1px solid #a7f3d0;
+}
+
+.user-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.35rem 0.85rem 0.35rem 0.35rem;
+  background: #f6faf9;
+  border: 1px solid #e2ebe8;
+  border-radius: 999px;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #099078, #067a65);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.user-email {
+  font-size: 0.78rem;
+  color: #5c736d;
+  font-weight: 500;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-logout {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2ebe8;
+  border-radius: 10px;
+  background: #fff;
+  color: #5c736d;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .user-email {
+    display: none;
+  }
+}
